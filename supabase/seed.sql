@@ -1,0 +1,2 @@
+-- Intentionally empty.
+-- Keep this file tracked because `supabase db reset` references it by default.

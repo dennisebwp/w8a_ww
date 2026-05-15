@@ -5,17 +5,38 @@ function sendMainMenu(client, from) {
 
 Estamos aquí para ayudarte a alcanzar tus metas de *fitness* y *nutrición*.
 
-🔹 *Este formulario tiene 21 preguntas.*
-🔹 Puedes salir en cualquier momento usando el comando *salir*.
-🔹 Si eres un **usuario nuevo**, selecciona *start* para registrarte.
-🔹 Si deseas **actualizar tus datos**, selecciona *update*.
+🔹 *Este formulario es dinámico y guarda tu historial.*
+🔹 Si eres un **usuario nuevo**, usa *start* para registrarte.
+🔹 Si deseas **actualizar tus datos**, usa *update*.
+🔹 Si dejaste un formulario incompleto, usa *continue* para retomarlo.
 
 *Comandos disponibles:*
 👉 *start* - Iniciar el formulario
+👉 *continue* - Retomar un formulario pendiente
 👉 *update* - Actualizar tus datos
 👉 *planes* - Ver los planes de entrenamiento y nutrición
-👉 *help* - Ver comandos disponibles
+👉 *status* - Ver tu estado actual
+👉 *menu* o *help* - Ver comandos disponibles
+👉 *back* - Volver a la pregunta anterior
+👉 *salir* - Cancelar el flujo actual
 `);
+}
+
+function sendNavigationHelp(client, from, mode) {
+    const modeLabel = mode === 'update' ? 'actualización' : 'formulario';
+
+    client.sendMessage(from, `
+🧭 *Navegación del ${modeLabel}*
+
+👉 *back* - Volver al paso anterior
+👉 *status* - Ver en qué punto vas
+👉 *menu* o *help* - Ver el menú principal
+👉 *salir* - Cancelar el flujo actual
+${mode === 'update' ? '👉 *done* - Salir del modo de actualización\n' : ''}`.trim());
+}
+
+function sendStatusMessage(client, from, message) {
+    client.sendMessage(from, `📍 *Estado actual*\n\n${message}`);
 }
 
 // Function to display information about available plans
@@ -45,4 +66,9 @@ Para más información o para iniciar tu plan, contáctanos.
 `);
 }
 
-module.exports = { sendMainMenu, sendPlanInfo };
+module.exports = {
+    sendMainMenu,
+    sendPlanInfo,
+    sendNavigationHelp,
+    sendStatusMessage,
+};

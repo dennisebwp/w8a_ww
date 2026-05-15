@@ -7,3 +7,5 @@ keys/*.json
 .env
 .wwebjs_auth/*
 .wwebjs_cache/*
+admin/dist/
+supabase/.temp/
